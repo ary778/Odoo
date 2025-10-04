@@ -1,83 +1,133 @@
-# Expense Management System
+Expensify - Enterprise Expense Management API
+<p align="center">
+<img alt="Python" src="https://img.shields.io/badge/python-3.11-blue.svg">
+<img alt="Django" src="https://img.shields.io/badge/django-5.2-green.svg">
+<img alt="DRF" src="https://img.shields.io/badge/DRF-3.15-red.svg">
+<img alt="PostgreSQL" src="https://img.shields.io/badge/postgresql-16-blue.svg">
+<img alt="License" src="https://img.shields.io/badge/license-MIT-lightgrey.svg">
+</p>
 
-The Expense Management System is a SaaS solution designed to streamline and automate corporate Travel & Expense (T&E) workflows. It reduces operational friction, enhances data accuracy, and ensures compliance by replacing manual reimbursement processes. This repository contains the decoupled frontend client, a lightweight Vanilla JavaScript Single Page Application (SPA) that integrates with a backend RESTful API.
+A robust, scalable, and secure backend for a modern expense management platform, built with Django and Django REST Framework.
 
-## Overview
+About The Project
+Expensify is a powerful backend solution designed to solve the common challenges of manual expense reimbursement. It provides a full-featured RESTful API to handle complex, multi-level approval workflows, conditional rules, and role-based permissions, eliminating time-consuming and error-prone manual processes. 
 
-This system optimizes expense tracking and reimbursement for organizations through the following key features:
+Key Features
 
-- **Multi-Tenant Onboarding**: Admins can create company tenants, define default currencies based on country selection, and configure organizational settings.
-- **Role-Based Access Control (RBAC)**:
-  - **System Administrator**: Full oversight to manage users, approval hierarchies, and resolve escalations.
-  - **Approving Manager**: Dedicated dashboard to review and action expense claims in the company's default currency.
-  - **Individual Contributor**: Submit expense claims in multiple currencies and track submission status (In Process, Approved, Rejected).
-- **Configurable Approval Workflows**: Dynamic, multi-level approval chains to route claims through organizational hierarchies.
-- **Stateful Dashboards**: Persona-specific interfaces that persist session data and streamline user interactions.
+Role-Based Access Control: Granular permissions for Admin, Manager, and Employee roles. 
 
-## System Architecture
 
-The system employs a decoupled architecture for scalability, maintainability, and independent deployment of frontend and backend components.
 
-### Frontend
+Dynamic Approval Workflows: Admins can define custom, multi-step approval sequences (e.g., Manager → Finance → Director). 
 
-- **Core**: Vanilla JavaScript (ES6+) and HTML5 for a lightweight SPA with no framework dependencies.
-- **Styling**: CSS3 with a custom design system using CSS Variables for theming and maintainability.
-- **Routing**: Browser History API for seamless, multi-page-like navigation.
-- **State Management**: Global application scope for client-side state, eliminating external library overhead.
 
-### Backend (Designed)
+Conditional Rule Engine: Supports advanced approval logic, such as auto-approval based on a percentage of approvers or approval by a specific high-level user (e.g., CFO). 
 
-- **Framework**: Django with Django REST Framework for a secure, scalable RESTful API.
-- **Authentication**: JSON Web Tokens (JWT) for stateless, secure client-server communication, including email verification for user accounts.
-- **Database**: PostgreSQL for robust relational data management.
-- **Caching**: Redis for performance optimization of frequent queries (e.g., user lists, expense reports).
+Secure Authentication: Uses JSON Web Tokens (JWT) for secure, stateless API authentication.
 
-## Getting Started
 
-Follow these steps to set up the frontend for local development.
+User & Company Management: Automated company and admin creation on first signup, with full user management capabilities for admins. 
 
-### Prerequisites
 
-- Code editor (e.g., Visual Studio Code)
-- Live Server extension for VS Code
-- Backend server running at `http://127.0.0.1:8000` (use a `.env` file for secrets like database credentials and `SECRET_KEY`)
+Email Notifications: Automatic email notifications are sent to new users upon account creation.
 
-### Setup Instructions
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Ary778/Odoo.git
-   ```
-2. Navigate to the frontend directory:
-   ```bash
-   cd Odoo/frontend
-   ```
-3. Launch the development server:
-   - Right-click `index.html` in VS Code and select `Open with Live Server`.
+Currency Conversion: Integrated with an external API to display expense amounts in the manager's default currency. 
 
-## Product Roadmap
 
-Planned features for future sprints:
 
-- OCR Integration: Automate receipt data entry using services like AWS Textract or Google Cloud Vision.
-- Advanced Rules Engine: Support conditional logic for approval workflows based on expense categories or amounts.
-- Third-Party Integrations: Sync with accounting platforms like QuickBooks or Xero.
-- Analytics & Reporting: Generate insights on spending patterns, budget adherence, and approval cycle times.
-- CI/CD Pipeline: Automate testing and deployments with GitHub Actions.
+OCR Integration (Mock): Includes a ready-to-use endpoint for integrating OCR to auto-read receipt data. 
 
-## Contribution Guidelines
+Tech Stack & Architecture
+This project is built with an API-first, decoupled architecture, ensuring a clean separation between the business logic on the backend and the user interface.
 
-Contributions are welcome. Please adhere to the following:
+Backend
+Technology	Description
+Python 3.11	Core programming language.
+Django 5.2	High-level web framework for rapid development.
+Django REST Framework	Powerful toolkit for building Web APIs.
+PostgreSQL	Robust, open-source relational database.
+Simple JWT	JSON Web Token authentication for DRF.
+django-cors-headers	Handles Cross-Origin Resource Sharing (CORS).
 
-- **Branch Naming**: Use `feature/<feature-name>`, `bugfix/<bug-name>`, or `hotfix/<fix-name>`.
-- **Commit Messages**: Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
-- **Code Style**: Adhere to existing conventions. ESLint/Prettier configurations will be added for consistency.
+Export to Sheets
+Architecture
+Service Layer: Complex business logic (e.g., create_approval_workflow, evaluate_conditional_rules) is abstracted into a dedicated services.py file to keep views and models clean.
 
-## License
+RESTful API: The application exposes a set of well-defined, stateless RESTful endpoints.
 
-Distributed under the MIT License. See `LICENSE` for details.
+Custom User Model: Extends Django's default user to include roles and company relationships.
 
-## Contributors
+Getting Started
+Follow these steps to get the backend running locally.
 
-- Jash Parekh
-- Aryan Suthar
+Prerequisites
+Python 3.10+
+
+PostgreSQL installed and running
+
+A code editor like VS Code
+
+Backend Installation & Setup
+Clone the repository
+
+Bash
+
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name/backend
+Create and activate a virtual environment
+
+Bash
+
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+Install dependencies
+
+Bash
+
+pip install -r requirements.txt
+Set up the database
+
+Open psql and create the database:
+
+SQL
+
+CREATE DATABASE expense_db;
+Configure Environment Variables
+
+Create a .env file in the backend directory.
+
+Add your database and email credentials. This file should be in your .gitignore!
+
+Code snippet
+
+# .env
+DB_NAME=expense_db
+DB_USER=your_postgres_user
+DB_PASSWORD=your_postgres_password
+
+EMAIL_USER=youremail@gmail.com
+EMAIL_PASSWORD=your16charactergoogleapppassword
+Run Database Migrations
+
+Bash
+
+python manage.py makemigrations
+python manage.py migrate
+Run the development server
+
+Bash
+
+python manage.py runserver
+The API will be available at http://127.0.0.1:8000/api/.
+
+API Endpoints Overview
+Endpoint	Method	Description	Auth Required
+/api/signup/	POST	Creates a new Company and Admin user.	No
+/api/token/	POST	Obtains JWT for a user.	No
+/api/expenses/	GET, POST	List all relevant expenses or create a new one.	Yes
+/api/users/	GET, POST	List or create users (Admin only for POST).	Yes
+/api/approvals/	GET	List pending approvals for the logged-in manager.	Yes
+/api/approvals/{id}/act/	POST	Approve or reject a specific approval task.	Yes
+/api/workflows/	GET, POST	List or create multi-step approval workflows (Admin only).	Yes
+/api/rules/	GET, POST	List or create conditional approval rules (Admin only).	Yes
