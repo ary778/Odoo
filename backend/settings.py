@@ -1,6 +1,7 @@
 # backend/settings.py
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -89,7 +90,12 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 # Email Configuration (for development)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # Use the SMTP backend
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_USER')          # Reads from your .env file
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')  # Reads from your .env file
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
