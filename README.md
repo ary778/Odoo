@@ -1,4 +1,4 @@
-Expensify - Enterprise Expense Management API
+<u>Expensify - Enterprise Expense Management API</u>
 <p align="center">
 <img alt="Python" src="https://img.shields.io/badge/python-3.11-blue.svg">
 <img alt="Django" src="https://img.shields.io/badge/django-5.2-green.svg">
@@ -9,36 +9,26 @@ Expensify - Enterprise Expense Management API
 
 A robust, scalable, and secure backend for a modern expense management platform, built with Django and Django REST Framework.
 
-About The Project
-Expensify is a powerful backend solution designed to solve the common challenges of manual expense reimbursement. It provides a full-featured RESTful API to handle complex, multi-level approval workflows, conditional rules, and role-based permissions, eliminating time-consuming and error-prone manual processes. 
+Expensify is a powerful backend solution designed to solve the common challenges of manual expense reimbursement. It provides a full-featured RESTful API to handle complex, multi-level approval workflows, conditional rules, and role-based permissions, eliminating time-consuming and error-prone manual processes.
 
-Key Features
+<u>Key Features</u>
+Role-Based Access Control: Granular permissions for Admin, Manager, and Employee roles.
 
-Role-Based Access Control: Granular permissions for Admin, Manager, and Employee roles. 
+Dynamic Approval Workflows: Admins can define custom, multi-step approval sequences (e.g., Manager → Finance → Director).
 
-
-
-Dynamic Approval Workflows: Admins can define custom, multi-step approval sequences (e.g., Manager → Finance → Director). 
-
-
-Conditional Rule Engine: Supports advanced approval logic, such as auto-approval based on a percentage of approvers or approval by a specific high-level user (e.g., CFO). 
+Conditional Rule Engine: Supports advanced approval logic, such as auto-approval based on a percentage of approvers or approval by a specific high-level user (e.g., CFO).
 
 Secure Authentication: Uses JSON Web Tokens (JWT) for secure, stateless API authentication.
 
-
-User & Company Management: Automated company and admin creation on first signup, with full user management capabilities for admins. 
-
+User & Company Management: Automated company and admin creation on first signup, with full user management capabilities for admins.
 
 Email Notifications: Automatic email notifications are sent to new users upon account creation.
 
+Currency Conversion: Integrated with an external API to display expense amounts in the manager's default currency.
 
-Currency Conversion: Integrated with an external API to display expense amounts in the manager's default currency. 
+OCR Integration (Mock): Includes a ready-to-use endpoint for integrating OCR to auto-read receipt data.
 
-
-
-OCR Integration (Mock): Includes a ready-to-use endpoint for integrating OCR to auto-read receipt data. 
-
-Tech Stack & Architecture
+<u>Tech Stack & Architecture</u>
 This project is built with an API-first, decoupled architecture, ensuring a clean separation between the business logic on the backend and the user interface.
 
 Backend
@@ -58,7 +48,7 @@ RESTful API: The application exposes a set of well-defined, stateless RESTful en
 
 Custom User Model: Extends Django's default user to include roles and company relationships.
 
-Getting Started
+<u>Getting Started</u>
 Follow these steps to get the backend running locally.
 
 Prerequisites
@@ -71,11 +61,13 @@ A code editor like VS Code
 Backend Installation & Setup
 Clone the repository
 
+
 Bash
 
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name/backend
 Create and activate a virtual environment
+
 
 Bash
 
@@ -83,10 +75,12 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 Install dependencies
 
+
 Bash
 
 pip install -r requirements.txt
 Set up the database
+
 
 Open psql and create the database:
 
@@ -94,6 +88,7 @@ SQL
 
 CREATE DATABASE expense_db;
 Configure Environment Variables
+
 
 Create a .env file in the backend directory.
 
@@ -110,18 +105,20 @@ EMAIL_USER=youremail@gmail.com
 EMAIL_PASSWORD=your16charactergoogleapppassword
 Run Database Migrations
 
+
 Bash
 
 python manage.py makemigrations
 python manage.py migrate
 Run the development server
 
+
 Bash
 
 python manage.py runserver
 The API will be available at http://127.0.0.1:8000/api/.
 
-API Endpoints Overview
+<u>API Endpoints Overview</u>
 Endpoint	Method	Description	Auth Required
 /api/signup/	POST	Creates a new Company and Admin user.	No
 /api/token/	POST	Obtains JWT for a user.	No
