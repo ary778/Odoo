@@ -168,5 +168,6 @@ Pull requests are welcome!
 For major changes, please open an issue first to discuss your proposal.
 
 **⭐ Support**
+
 If you find this project useful, consider giving it a ⭐ on GitHub it helps others discover it!
 
