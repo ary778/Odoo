@@ -28,7 +28,7 @@ The system employs a decoupled architecture for scalability, maintainability, an
 ### Backend (Designed)
 
 - **Framework**: Django with Django REST Framework for a secure, scalable RESTful API.
-- **Authentication**: JSON Web Tokens (JWT) for stateless, secure client-server communication.
+- **Authentication**: JSON Web Tokens (JWT) for stateless, secure client-server communication, including email verification for user accounts.
 - **Database**: PostgreSQL for robust relational data management.
 - **Caching**: Redis for performance optimization of frequent queries (e.g., user lists, expense reports).
 
