@@ -1,4 +1,4 @@
-# api/models.py (updated)
+# api/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -19,15 +19,41 @@ class User(AbstractUser):
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='employee')
     manager = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role__in': ['manager', 'admin']})
 
+class ApprovalWorkflow(models.Model):
+    name = models.CharField(max_length=100)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='workflows')
+
+    def __str__(self):
+        return self.name
+
+class WorkflowStep(models.Model):
+    workflow = models.ForeignKey(ApprovalWorkflow, on_delete=models.CASCADE, related_name='steps')
+    approver = models.ForeignKey(User, on_delete=models.CASCADE)
+    sequence = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ['sequence']
+
+class ApprovalRule(models.Model):
+    RULE_TYPE_CHOICES = (
+        ('percentage', 'Percentage'),
+        ('specific_approver', 'Specific Approver'),
+    )
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='rules')
+    rule_type = models.CharField(max_length=20, choices=RULE_TYPE_CHOICES)
+    threshold_percentage = models.PositiveIntegerField(null=True, blank=True, help_text="e.g., 60 for 60%")
+    specific_approver = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
 class Expense(models.Model):
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
-        ('in_progress', 'In Progress'), # New status for multi-level
+        ('in_progress', 'In Progress'),
     )
     employee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='expenses')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='expenses')
+    workflow = models.ForeignKey(ApprovalWorkflow, on_delete=models.SET_NULL, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3, default='USD')
     category = models.CharField(max_length=100)
